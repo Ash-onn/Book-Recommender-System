@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    .body{
+        background-color: black;
+        color:white;
+    }
+    .card{
+        background-color: black;
+        color: whitesmoke;
+    }
+    .card-title, .card-text{
+        color:white;
+    }
+    .text-white{
+        color: whitesmoke;
+    }
+    .book-card{
+        margin-bottom:30px;
+    }
+    .card-img-top{
+        width: 50%;
+        height: auto;
+    }
+    .card-body{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+</style>
+<body style="background-color: black;">
+    <nav class="navbar" style="background-color: cyan;">
+        <a class="navbar-brand" href="/">My Book Recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="my-4" style="font-style: italic; color: lightseagreen;">Top 50 Books</h1>
+        
+        {% for i in range(0, books|length, 3) %}
+        <div class="row">
+            {% for j in range(i, i + 3) %}
+                {% if j < books|length %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img class="card-img-top" src="{{ books[j]['image'] or 'https://picsum.photos/id/870/200/300?grayscale&blur=2' }}" alt="{{ books[j]['title'] }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ books[j]['title'] }}</h5>
+                            <p class="card-text">Author: {{ books[j]['author'] }}</p>
+                            <p class="card-text">Votes: {{ books[j]['votes'] }}</p>
+                            <p class="card-text">Rating: {{ books[j]['rating'] }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
